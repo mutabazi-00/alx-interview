@@ -1,27 +1,29 @@
 def pascal_triangle(n):
-    # Step 2: Return an empty list if n <= 0
+    """
+    Returns a list of lists of integers representing Pascal’s triangle of n.
+    
+    Args:
+    n (int): The number of rows in Pascal's triangle.
+    
+    Returns:
+    List[List[int]]: A list of lists containing the integers in Pascal's triangle.
+    """
+    # Return an empty list if n is less than or equal to 0
     if n <= 0:
         return []
     
-    triangle = []  # Step 3: Initialize the triangle list
+    # Initialize the triangle with the first row
+    triangle = [[1]]
     
-    for i in range(n):
-        # Step 4: Create a new row
-        row = [1] * (i + 1)  # Start with all 1s
-        
-        # Step 4: Calculate the values for the inner elements
+    for i in range(1, n):
+        # Start each row with 1
+        row = [1]
+        # Calculate the values in the middle of the row
         for j in range(1, i):
-            row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]
-        
-        triangle.append(row)  # Append the row to the triangle
+            row.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
+        # End each row with 1
+        row.append(1)
+        # Add the row to the triangle
+        triangle.append(row)
     
-    return triangle  # Step 6: Return the completed triangle
-
-# Example usage
-if __name__ == "__main__":
-    n = 5
-    triangle = pascal_triangle(n)
-    
-    # Print the triangle
-    for row in triangle:
-        print("[{}]".format(",".join(map(str, row))))
+    return triangle
