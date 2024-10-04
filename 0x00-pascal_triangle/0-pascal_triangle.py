@@ -1,6 +1,6 @@
 def pascal_triangle(n):
     """
-    Returns a list of lists of integers representing Pascal’s triangle of n.
+    Returns a list of lists representing Pascal’s triangle of n.
     
     Args:
     n (int): The number of rows in Pascal's triangle.
@@ -16,14 +16,16 @@ def pascal_triangle(n):
     triangle = [[1]]
     
     for i in range(1, n):
-        # Start each row with 1
+        # Create the next row starting with 1
         row = [1]
-        # Calculate the values in the middle of the row
-        for j in range(1, i):
-            row.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
+        
+        # Use a list comprehension to calculate the middle values of the row
+        row.extend([triangle[i - 1][j - 1] + triangle[i - 1][j] for j in range(1, i)])
+        
         # End each row with 1
         row.append(1)
-        # Add the row to the triangle
+        
+        # Add the completed row to the triangle
         triangle.append(row)
     
     return triangle
